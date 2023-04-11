@@ -77,7 +77,7 @@ public class ReaderThread implements Runnable{
                     this.txtArea.appendText(input);
                 }
 
-                if (this.quit) return; //if some one closed the stage then this check will be performed every time, if true
+                if (this.quit) return; //if someone closed the stage then this check will be performed every time, if true
                 //thread execution will be stopped.
 
             } //while loop ending here
