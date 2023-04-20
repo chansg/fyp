@@ -1,5 +1,7 @@
 package uk.ac.aston.fyp;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -15,15 +17,19 @@ import java.util.concurrent.TimeUnit;
 class PortScanner {
 
     private String ip;
+    private int lower;
+    private int upper;
 
-    public PortScanner(String ip, int pn) throws InterruptedException, ExecutionException
+    public PortScanner(String ip, int lower, int upper) throws InterruptedException, ExecutionException
     {
         this.ip = ip;
+        this.lower = lower;
+        this.upper = upper;
         final ExecutorService es = Executors.newCachedThreadPool();
         final int timeout = 200;
         final List<Future<ScanResult>> futures = new ArrayList<>();
-        for (int port = 1; port <= 65535; port++) {
-            // for (int port = 1; port <= 80; port++) {
+        // 65535 total ports to scan
+        for (int port = lower; port <= upper; port++) {
             futures.add(portIsOpen(es, ip, port, timeout));
         }
         es.awaitTermination(200L, TimeUnit.MILLISECONDS);
@@ -86,5 +92,27 @@ class PortScanner {
             this.isOpen = isOpen;
         }
 
+    }
+
+    public static void nmapScanner(String ip, String lp, String up) {
+        try {
+            ProcessBuilder builder = new ProcessBuilder("python", System.getProperty("user.dir") + "\\..\\scripts\\nmap_scanner.py", ip, lp, up);
+            Process process = builder.start();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            BufferedReader readers = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+            String lines = null;
+            while((lines=reader.readLine())!=null) {
+                System.out.println("[*] " + lines);
+            }
+
+            while((lines=readers.readLine())!=null) {
+                System.out.println("[!] " + lines);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
