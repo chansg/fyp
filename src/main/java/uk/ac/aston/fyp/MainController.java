@@ -6,7 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -42,6 +44,15 @@ public class MainController implements Initializable {
     private TextField threadCount;
 
     @FXML
+    private TextField txt_selected_file;
+
+    @FXML
+    private Button btn_file_chooser;
+
+    @FXML
+    private Button btn_clear_file_select;
+
+    @FXML
     private Button scanPressed;
 
     @FXML
@@ -54,9 +65,23 @@ public class MainController implements Initializable {
     private CheckBox portDetails;
 
     @FXML
+    private CheckBox spoofIP;
+
+    @FXML
     private Slider slider_packets;
 
+    @FXML
+    private RadioButton none;
+    @FXML
+    private RadioButton silentScan;
+    @FXML
+    private RadioButton aggressiveScan;
+    @FXML
+    private RadioButton fastScan;
+
+    /*** Local Variables ***/
     DOS dos;
+    String path;
 
     public MainController() {}
 
@@ -91,9 +116,16 @@ public class MainController implements Initializable {
         String port = "80"; // todo default port use ports discovered on PortScanner
         String packets = String.valueOf( (int) slider_packets.getValue() );
         String threads = threadCount.getText();
+        String hideIP = "True";
+        if(spoofIP.isSelected()) {
+            hideIP = "True";
+        } else {
+            hideIP = "False";
+        }
+
 
         InetAddress address = InetAddress.getByName(ip);
-        dos = new DOS(address.getHostAddress(), port, packets, threads);
+        dos = new DOS(address.getHostAddress(), port, packets, threads, hideIP);
     }
 
     @FXML
@@ -109,5 +141,24 @@ public class MainController implements Initializable {
     @FXML
     void updateSliderValue(ActionEvent event) {
         slider_packets.setValue(Double.parseDouble(packetSizeCounter.getText()));
+    }
+
+    @FXML
+    void fileChooser(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Python Scripts", "*.py"));
+        File f = fc.showOpenDialog(null);
+
+        if( f != null) {
+            txt_selected_file.setText(""+f.getName());
+        }
+
+        path = f.getAbsolutePath();
+    }
+
+    @FXML
+    void clearFileSelect(ActionEvent event) {
+        txt_selected_file.setText("");
+        path = null;
     }
 }

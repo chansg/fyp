@@ -7,17 +7,12 @@ import java.net.DatagramSocket;
 
 public class DOS {
 
-//    private String ip;
-//    private String port;
-//    private int threads;
-//    private int packetsToSend;
-//    private long duration;
     ProcessBuilder builder;
     Process process;
 
-    public DOS(String ip, String port, String packetsToSend, String threads) {
+    public DOS(String ip, String port, String packetsToSend, String threads, String hideIP) {
         try {
-            builder = new ProcessBuilder("python", System.getProperty("user.dir") + "\\..\\scripts\\tcp_flooder.py", ip, "80", packetsToSend, threads);
+            builder = new ProcessBuilder("python", System.getProperty("user.dir") + "\\..\\scripts\\tcp_flooder.py", ip, "80", packetsToSend, threads, hideIP);
             process = builder.start();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
