@@ -124,6 +124,10 @@ public class MainController implements Initializable {
         String ip = targetIPAddress.getText();
         lower = Integer.parseInt(txt_portNumberLower.getText());
         upper = Integer.parseInt(txt_portNumberUpper.getText());
+        
+        if(!(path == null)) {
+            CustomScript cs = new CustomScript(path);
+        }
 
         if(portDetails.isSelected()) {
             PortScanner.nmapScanner(ip, txt_portNumberLower.getText(), txt_portNumberUpper.getText());
