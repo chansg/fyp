@@ -1,18 +1,16 @@
-package uk.ac.aston.fyp;
+package uk.ac.aston.fyp.features;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 
-public class DOS {
-
+public class CustomScript {
     ProcessBuilder builder;
     Process process;
+    /* Advanced Features */
 
-    public DOS(String ip, String port, String packetsToSend, String threads, String hideIP) {
+    public CustomScript(String path) {
         try {
-            builder = new ProcessBuilder("python", System.getProperty("user.dir") + "\\..\\scripts\\tcp_flooder.py", ip, "80", packetsToSend, threads, hideIP);
+            builder = new ProcessBuilder("python", System.getProperty("user.dir") + "\\..\\scripts\\CustomScript.py", path);
             process = builder.start();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -30,9 +28,5 @@ public class DOS {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void stopProcess() {
-        process.destroy();
     }
 }

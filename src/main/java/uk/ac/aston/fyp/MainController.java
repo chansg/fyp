@@ -4,9 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import uk.ac.aston.fyp.features.AggressiveScan;
+import uk.ac.aston.fyp.features.CustomScript;
+import uk.ac.aston.fyp.features.FastScan;
+import uk.ac.aston.fyp.features.StealthScan;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -29,6 +32,9 @@ public class MainController implements Initializable {
     private TextField targetIPAddress;
 
     @FXML
+    private TextField txt_duration;
+
+    @FXML
     private TextField dos_target_ip;
 
     @FXML
@@ -42,6 +48,12 @@ public class MainController implements Initializable {
 
     @FXML
     private TextField threadCount;
+
+    @FXML
+    private TextField txt_loop;
+
+    @FXML
+    private TextField dos_port;
 
     @FXML
     private TextField txt_selected_file;
@@ -68,19 +80,33 @@ public class MainController implements Initializable {
     private CheckBox spoofIP;
 
     @FXML
+    private CheckBox randomise_packet;
+
+    @FXML
     private Slider slider_packets;
 
     @FXML
     private RadioButton none;
+
     @FXML
     private RadioButton silentScan;
+
     @FXML
     private RadioButton aggressiveScan;
+
     @FXML
     private RadioButton fastScan;
 
+    @FXML
+    private RadioButton udp_protocol;
+
+    @FXML
+    private RadioButton tcp_protocol;
+
+
     /*** Local Variables ***/
-    DOS dos;
+    SYNFlooder synFlooder;
+    UDPFlooder udpFlooder;
     String path;
 
     public MainController() {}
@@ -92,7 +118,7 @@ public class MainController implements Initializable {
 
     @FXML
     void scanPressed(ActionEvent event) throws ExecutionException, InterruptedException, MalformedURLException {
-        /* Default */
+        /* Default Values*/
         int lower = 1;
         int upper = 65535;
         String ip = targetIPAddress.getText();
@@ -108,29 +134,48 @@ public class MainController implements Initializable {
             System.out.println("PortScanner is scanning open ports on: " + ip);
             PortScanner ps = new PortScanner(ip, lower, upper);
         }
+
+        /* Advanced Features */
+        if(silentScan.isSelected()) {
+            StealthScan ss = new StealthScan(ip);
+        }
+        if(aggressiveScan.isSelected()) {
+            AggressiveScan aggressiveScan = new AggressiveScan(ip);
+        }
+        if(fastScan.isSelected()) {
+            FastScan fastScan = new FastScan(ip);
+        }
     }
 
     @FXML
     void startAttack(ActionEvent event) throws UnknownHostException {
         String ip = dos_target_ip.getText();
-        String port = "80"; // todo default port use ports discovered on PortScanner
+        String port = dos_port.getText();
         String packets = String.valueOf( (int) slider_packets.getValue() );
         String threads = threadCount.getText();
-        String hideIP = "True";
-        if(spoofIP.isSelected()) {
-            hideIP = "True";
-        } else {
-            hideIP = "False";
-        }
-
+        String loop = txt_loop.getText();
+        String duration = txt_duration.getText();
 
         InetAddress address = InetAddress.getByName(ip);
-        dos = new DOS(address.getHostAddress(), port, packets, threads, hideIP);
+
+        if(tcp_protocol.isSelected()) {
+            synFlooder = new SYNFlooder(address.getHostAddress(), port, packets, threads, loop); // packet size does not work tcp=64 bytes
+        } else {
+            System.err.println("Unable to start attack.");
+        }
+
+        if(udp_protocol.isSelected()){
+            udpFlooder = new UDPFlooder(address.getHostAddress(), port, duration, packets);
+        } else {
+            System.err.println("Unable to start attack.");
+        }
     }
 
     @FXML
     void stopAttack(ActionEvent event) {
-        dos.stopProcess();
+        synFlooder.process.destroy();
+        udpFlooder.process.destroy();
+        System.out.println("Successfully killed all processes.");
     }
 
     @FXML
@@ -154,6 +199,11 @@ public class MainController implements Initializable {
         }
 
         path = f.getAbsolutePath();
+    }
+
+    @FXML
+    void runCustomScript(ActionEvent event) {
+        CustomScript cs = new CustomScript(path);
     }
 
     @FXML
