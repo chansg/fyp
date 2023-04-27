@@ -1,0 +1,34 @@
+****************************Console Started Successfully****************************
+PortScanner is scanning open ports on: 172.16.48.79
+80
+There are 1 open ports on host 172.16.48.79 (probed with a timeout of 200ms)
+[*] Starting Nmap 7.80 ( https://nmap.org ) at 2023-04-27 07:55 GMT Summer Time
+[*] Nmap scan report for 172.16.48.79
+[*] Host is up (0.0012s latency).
+[*] Not shown: 79 closed ports
+[*] PORT   STATE SERVICE VERSION
+[*] 80/tcp open  http    SimpleHTTPServer 0.6 (Python 3.9.2)
+[*] |_http-server-header: SimpleHTTP/0.6 Python/3.9.2
+[*] |_http-title: Directory listing for /
+[*] MAC Address: 00:0C:29:3B:8A:55 (VMware)
+[*] No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+[*] TCP/IP fingerprint:
+[*] OS:SCAN(V=7.80%E=4%D=4/27%OT=80%CT=1%CU=33807%PV=Y%DS=1%DC=D%G=Y%M=000C29%T
+[*] OS:M=644A1C85%P=i686-pc-windows-windows)SEQ(SP=103%GCD=1%ISR=109%TI=Z%CI=Z%
+[*] OS:II=I%TS=A)SEQ(CI=Z%II=I%TS=A)SEQ(TI=Z%CI=Z%II=I%TS=A)OPS(O1=M5B4ST11NW7%
+[*] OS:O2=M5B4ST11NW7%O3=M5B4NNT11NW7%O4=M5B4ST11NW7%O5=M5B4ST11NW7%O6=M5B4ST11
+[*] OS:)WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=FE88)ECN(R=Y%DF=Y%T=40%W
+[*] OS:=FAF0%O=M5B4%CC=N%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=
+[*] OS:N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A
+[*] OS:=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%D
+[*] OS:F=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL
+[*] OS:=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)
+[*] 
+[*] Network Distance: 1 hop
+[*] 
+[*] TRACEROUTE
+[*] HOP RTT     ADDRESS
+[*] 1   1.18 ms 172.16.48.79
+[*] 
+[*] OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+[*] Nmap done: 1 IP address (1 host up) scanned in 21.31 seconds
